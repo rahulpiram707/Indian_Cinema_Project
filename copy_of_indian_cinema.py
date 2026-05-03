@@ -54,9 +54,9 @@ final_movies = pd.concat(movies_list).drop_duplicates('tconst')
 final_movies.replace('\\N', '').to_csv('movies.csv', index=False)
 #the most filtered down method we could come up with, isnt perfect.
 
+#moving on to roles
 roles_list = []
 target_tconsts = set(final_movies['tconst'])
-print("Step 3: Extracting roles for verified movies...")
 
 # Using title.principals.tsv.gz
 for chunk in pd.read_csv('title.principals.tsv.gz', sep='\t', compression='gzip',
@@ -67,7 +67,6 @@ for chunk in pd.read_csv('title.principals.tsv.gz', sep='\t', compression='gzip'
 
 roles_df = pd.concat(roles_list)
 roles_df.to_csv('roles.csv', index=False)
-print(f"roles.csv created with {len(roles_df)} entries.")
 
 people_list = []
 target_nconsts = set(roles_df['nconst'])
